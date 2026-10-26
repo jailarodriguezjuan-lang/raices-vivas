@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raíces Vivas | Nación en Acción - Identidad Cultural Peruana</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.com/npm/chart.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        pastel: {
+                            terracotta: '#E8A598',
+                            terracottaDark: '#C87D6F',
+                            cream: '#FAF6F0',
+                            sand: '#F3E9DC',
+                            turquoise: '#94D2BD',
+                            turquoiseDark: '#005F73',
+                            gold: '#E9D8A6',
+                            goldDark: '#CA6702',
+                            lavender: '#D8B4E2',
+                            slate: '#4A5568'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #FAF6F0;
+            color: #2D3748;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .bg-pattern {
+            background-color: #FAF6F0;
+            background-image: radial-gradient(#E8A598 0.75px, transparent 0.75px), radial-gradient(#94D2BD 0.75px, #FAF6F0 0.75px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(232, 165, 152, 0.25);
+            box-shadow: 0 10px 30px -10px rgba(200, 125, 111, 0.1);
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #FAF6F0 0%, #F3E9DC 50%, #E8A598 100%);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #F3E9DC;
+            border-radius: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #E8A598;
+            border-radius: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #C87D6F;
+        }
+
+        .hero-card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .hero-card-hover:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 25px -5px rgba(200, 125, 111, 0.15), 0 10px 10px -5px rgba(200, 125, 111, 0.04);
+        }
+    </style>
+</head>
+<body class="bg-pattern antialiased selection:bg-pastel-terracotta selection:text-white min-h-screen flex flex-col justify-between">
+
+    <!-- NAV BAR -->
+    <nav class="sticky top-0 z-50 glass-card border-b border-pastel-terracotta/20 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center gap-3">
+                    <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-pastel-terracotta to-pastel-turquoise flex items-center justify-center text-white shadow-md text-xl font-bold font-serif">
+                        R
+                    </div>
+                    <div>
+                        <span class="text-xl font-bold font-serif text-gray-800 tracking-wide block leading-none">Raíces Vivas</span>
+                        <span class="text-xs font-semibold text-pastel-terracottaDark tracking-widest uppercase">Nación en Acción</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-1 lg:space-x-4 text-sm font-medium text-gray-700">
+                    <a href="#inicio" class="px-3 py-2 rounded-xl hover:bg-pastel-sand hover:text-pastel-terracottaDark transition-all">Inicio</a>
+                    <a href="#problematica" class="px-3 py-2 rounded-xl hover:bg-pastel-sand hover:text-pastel-terracottaDark transition-all">Diagnóstico Escolar</a>
+                    <a href="#heroes" class="px-3 py-2 rounded-xl hover:bg-pastel-sand hover:text-pastel-terracottaDark transition-all">Galería de Héroes</a>
+                    <a href="#trivia" class="px-3 py-2 rounded-xl hover:bg-pastel-sand hover:text-pastel-terracottaDark transition-all">Trivia Cultural</a>
+                    <a href="#propuestas" class="px-3 py-2 rounded-xl hover:bg-pastel-sand hover:text-pastel-terracottaDark transition-all">Acciones</a>
+                </div>
+
+                <div class="hidden md:flex">
+                    <a href="#propuestas" class="px-5 py-2.5 rounded-full bg-pastel-terracotta text-white font-semibold text-sm shadow-sm hover:bg-pastel-terracottaDark transition-all transform hover:scale-105">
+                        <i class="fa-solid fa-hand-holding-heart mr-2"></i> Sumar Compromiso
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="p-2 rounded-xl text-gray-700 hover:bg-pastel-sand focus:outline-none">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-pastel-terracotta/20 bg-pastel-cream/95 px-4 pt-3 pb-6 space-y-2">
+            <a href="#inicio" class="mobile-link block px-4 py-2.5 rounded-xl hover:bg-pastel-sand text-gray-700">Inicio</a>
+            <a href="#problematica" class="mobile-link block px-4 py-2.5 rounded-xl hover:bg-pastel-sand text-gray-700">Diagnóstico Escolar</a>
+            <a href="#heroes" class="mobile-link block px-4 py-2.5 rounded-xl hover:bg-pastel-sand text-gray-700">Galería de Héroes</a>
+            <a href="#trivia" class="mobile-link block px-4 py-2.5 rounded-xl hover:bg-pastel-sand text-gray-700">Trivia Cultural</a>
+            <a href="#propuestas" class="mobile-link block px-4 py-2.5 rounded-xl hover:bg-pastel-sand text-gray-700">Acciones</a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="inicio" class="relative overflow-hidden pt-12 pb-20 md:pt-20 md:pb-32 hero-gradient">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 text-center lg:text-left space-y-6">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-pastel-turquoise/30 text-pastel-turquoiseDark text-xs md:text-sm font-semibold tracking-wide border border-pastel-turquoise/40">
+                        <i class="fa-solid fa-award"></i> Proyecto de Impacto Social - Nación en Acción
+                    </div>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-serif text-gray-900 leading-tight">
+                        Rescatemos la <span class="text-pastel-terracottaDark underline decoration-pastel-gold decoration-wavy">Identidad Cultural</span> del Perú
+                    </h1>
+                    <p class="text-lg md:text-xl text-gray-600 font-normal leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                        Un pueblo que olvida sus raíces pierde su rumbo. Revalorizamos la memoria de nuestras heroínas y héroes para transformar la vergüenza en orgullo patrio en las aulas y calles del país.
+                    </p>
+                    <div class="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                        <a href="#heroes" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-pastel-terracotta text-white font-bold text-center shadow-lg hover:bg-pastel-terracottaDark transition-all duration-300 transform hover:-translate-y-1">
+                            <i class="fa-solid fa-compass mr-2"></i> Explorar Nombres e Historia
+                        </a>
+                        <a href="#problematica" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-white text-gray-700 border border-pastel-terracotta/30 font-semibold text-center hover:bg-pastel-sand transition-all duration-300">
+                            <i class="fa-solid fa-chart-pie mr-2"></i> Ver Diagnóstico
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5">
+                    <div class="relative mx-auto max-w-md lg:max-w-none">
+                        <!-- Card Hero Stack -->
+                        <div class="glass-card p-6 md:p-8 rounded-3xl relative z-10 border border-pastel-gold/40 space-y-6">
+                            <div class="flex items-center justify-between border-b border-pastel-sand pb-4">
+                                <div class="flex items-center gap-3">
+                                    <span class="w-3 h-3 rounded-full bg-red-400"></span>
+                                    <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+                                    <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+                                </div>
+                                <span class="text-xs font-semibold uppercase tracking-wider text-pastel-terracottaDark bg-pastel-sand px-3 py-1 rounded-full">Reflexión Patriótica</span>
+                            </div>
+
+                            <blockquote class="text-lg font-serif italic text-gray-700">
+                                "¿Sabías que miles de estudiantes caminan a diario por pabellones que llevan el nombre de ilustres peruanos sin conocer la proeza por la que entregaron la vida?"
+                            </blockquote>
+
+                            <div class="grid grid-cols-2 gap-4 pt-2">
+                                <div class="bg-pastel-cream p-4 rounded-2xl border border-pastel-terracotta/20 text-center">
+                                    <span class="text-3xl font-extrabold text-pastel-terracottaDark block">68%</span>
+                                    <span class="text-xs text-gray-600 font-medium">Desconocimiento escolar histórico</span>
+                                </div>
+                                <div class="bg-pastel-cream p-4 rounded-2xl border border-pastel-turquoise/30 text-center">
+                                    <span class="text-3xl font-extrabold text-pastel-turquoiseDark block">8/10</span>
+                                    <span class="text-xs text-gray-600 font-medium">Jóvenes prefieren modismos ajenos</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Decorative background shapes -->
+                        <div class="absolute -top-6 -right-6 w-32 h-32 bg-pastel-gold/40 rounded-full blur-2xl"></div>
+                        <div class="absolute -bottom-6 -left-6 w-40 h-40 bg-pastel-turquoise/30 rounded-full blur-2xl"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROBLEMÁTICA Y DIAGNÓSTICO ESCOLAR -->
+    <section id="problematica" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <span class="text-xs font-bold tracking-widest text-pastel-terracottaDark uppercase bg-pastel-terracotta/20 px-4 py-1.5 rounded-full">
+                La Raíz del Problema
+            </span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold font-serif text-gray-900 mt-4">
+                Pérdida de Identidad y Aculturación en la Juventud
+            </h2>
+            <p class="text-gray-600 mt-4 leading-relaxed">
+                El desapego por las tradiciones autóctonas, la adopción irreflexiva de patrones culturales foráneos y la falta de memoria histórica están socavando nuestra cohesión nacional.
+            </p>
+        </div>
+
+        <!-- Casos de Estudio Escolares -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+            <!-- Colegio Mariano Melgar -->
+            <div class="glass-card p-6 rounded-3xl hero-card-hover border-t-4 border-pastel-terracotta">
+                <div class="w-12 h-12 rounded-2xl bg-pastel-terracotta/20 flex items-center justify-center text-pastel-terracottaDark text-xl font-bold mb-4">
+                    <i class="fa-solid fa-feather-pointed"></i>
+                </div>
+                <h3 class="text-lg font-bold font-serif text-gray-800">I.E. Mariano Melgar</h3>
+                <p class="text-xs text-pastel-terracottaDark font-semibold mb-3">Arequipa / Lima</p>
+                <p class="text-sm text-gray-600 leading-relaxed">
+                    Gran parte de los alumnos relaciona su institución solo con la infraestructura deportiva, ignorando que Melgar fue el precursor del romanticismo y mártir de la independencia que dio su vida a los 24 años.
+                </p>
+            </div>
+
+            <!-- Colegio Juan Pablo II -->
+            <div class="glass-card p-6 rounded-3xl hero-card-hover border-t-4 border-pastel-turquoise">
+                <div class="w-12 h-12 rounded-2xl bg-pastel-turquoise/20 flex items-center justify-center text-pastel-turquoiseDark text-xl font-bold mb-4">
+                    <i class="fa-solid fa-dove"></i>
+                </div>
+                <h3 class="text-lg font-bold font-serif text-gray-800">I.E. Juan Pablo II</h3>
+                <p class="text-xs text-pastel-turquoiseDark font-semibold mb-3">Nacional</p>
+                <p class="text-sm text-gray-600 leading-relaxed">
+                    Se desconoce el mensaje de paz, unión e integración humana que promovió en sus visitas al Perú, reduciendo el legado escolar a un mero nombre formal de libreta académica.
+                </p>
+            </div>
+
+            <!-- Colegio San Pedro de Alcántara -->
+            <div class="glass-card p-6 rounded-3xl hero-card-hover border-t-4 border-pastel-goldDark">
+                <div class="w-12 h-12 rounded-2xl bg-pastel-gold/30 flex items-center justify-center text-pastel-goldDark text-xl font-bold mb-4">
+                    <i class="fa-solid fa-book-bookmark"></i>
+                </div>
+                <h3 class="text-lg font-bold font-serif text-gray-800">I.E. San Pedro de Alcántara</h3>
+                <p class="text-xs text-pastel-goldDark font-semibold mb-3">Nacional</p>
+                <p class="text-sm text-gray-600 leading-relaxed">
+                    Estudiantes presentan dificultades para identificar los valores de austeridad, disciplina y servicio a la comunidad que caracterizaron la historia de su patrono institucional.
+                </p>
+            </div>
+
+            <!-- Colegio Don Bosco -->
+            <div class="glass-card p-6 rounded-3xl hero-card-hover border-t-4 border-pastel-lavender">
+                <div class="w-12 h-12 rounded-2xl bg-pastel-lavender/30 flex items-center justify-center text-purple-700 text-xl font-bold mb-4">
+                    <i class="fa-solid fa-hands-holding-child"></i>
+                </div>
+                <h3 class="text-lg font-bold font-serif text-gray-800">I.E. Salesiana Don Bosco</h3>
+                <p class="text-xs text-purple-700 font-semibold mb-3">Nacional</p>
+                <p class="text-sm text-gray-600 leading-relaxed">
+                    A pesar del modelo educativo enfocado en la juventud, existe desconexión sobre cómo aplicar la vocación de servicio social a la preservación del patrimonio del propio país.
+                </p>
+            </div>
+        </div>
+
+        <!-- Estadísticas e Indicadores Gráficos -->
+        <div class="glass-card rounded-3xl p-8 border border-pastel-sand">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div class="lg:col-span-5 space-y-5">
+                    <h3 class="text-2xl font-bold font-serif text-gray-900">
+                        ¿Qué revela el Diagnóstico Juvenil Actual?
+                    </h3>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        Evaluaciones aplicadas en centros educativos muestran la urgencia de revitalizar los contenidos curriculares y las estrategias de sentido de pertenencia:
+                    </p>
+                    <ul class="space-y-3 text-sm text-gray-700">
+                        <li class="flex items-center gap-3">
+                            <span class="w-6 h-6 rounded-full bg-red-100 text-red-500 flex items-center justify-center text-xs"><i class="fa-solid fa-xmark"></i></span>
+                            <span><strong>Vergüenza de Orígenes:</strong> Desuso del quechua o expresiones autóctonas por temor a burlas.</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-6 h-6 rounded-full bg-red-100 text-red-500 flex items-center justify-center text-xs"><i class="fa-solid fa-xmark"></i></span>
+                            <span><strong>Aculturación Masiva:</strong> Adopción de tendencias globales sin filtro o valoración local.</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs"><i class="fa-solid fa-check"></i></span>
+                            <span><strong>Oportunidad:</strong> Un 82% afirma que le gustaría aprender historia mediante herramientas digitales interactivas.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="lg:col-span-7 bg-white/60 p-4 sm:p-6 rounded-2xl border border-pastel-sand">
+                    <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4 text-center">Nivel de Conocimiento Patriótico vs. Tendencias Externas</h4>
+                    <div class="relative h-64 sm:h-80 w-full">
+                        <canvas id="chartIdentidad"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MÓDULO INTERACTIVO: HÉROES E ÍCONOS DE NUESTRA HISTORIA -->
+    <section id="heroes" class="py-20 bg-pastel-sand/40 border-y border-pastel-terracotta/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+                <div>
+                    <span class="text-xs font-bold tracking-widest text-pastel-terracottaDark uppercase bg-pastel-terracotta/20 px-4 py-1.5 rounded-full">
+                        Galería Interactiva
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold font-serif text-gray-900 mt-4">
+                        Héroes e Íconos del Perú
+                    </h2>
+                    <p class="text-gray-600 text-sm sm:text-base mt-2">
+                        Conoce sus hazañas transcendentales y por qué sus nombres deben vivirse con orgullo.
+                    </p>
+                </div>
+
+                <!-- Buscador y Filtro -->
+                <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+                    <div class="relative flex-grow">
+                        <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                        <input type="text" id="hero-search" placeholder="Buscar héroe o hazaña..." 
+                            class="w-full pl-11 pr-4 py-2.5 rounded-2xl bg-white border border-pastel-terracotta/30 text-sm focus:outline-none focus:ring-2 focus:ring-pastel-terracotta">
+                    </div>
+                    <select id="hero-filter" class="px-4 py-2.5 rounded-2xl bg-white border border-pastel-terracotta/30 text-sm font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-pastel-terracotta">
+                        <option value="todos">Todos los periodos</option>
+                        <option value="independencia">Independencia / Precursores</option>
+                        <option value="republica">República / Defensa Nacional</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Grid de Tarjetas de Héroes -->
+            <div id="heroes-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Se llena mediante JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- TRIVIA CULTURAL INTERACTIVA -->
+    <section id="trivia" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="glass-card rounded-3xl p-6 sm:p-12 border border-pastel-turquoise/40 relative overflow-hidden">
+            <div class="max-w-3xl mx-auto text-center mb-8">
+                <span class="text-xs font-bold tracking-widest text-pastel-turquoiseDark uppercase bg-pastel-turquoise/30 px-4 py-1.5 rounded-full">
+                    Desafío de Conocimiento
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold font-serif text-gray-900 mt-4">
+                    Demuestra tu Peruanidad
+                </h2>
+                <p class="text-gray-600 text-sm sm:text-base mt-2">
+                    Pon a prueba cuánto sabes sobre la historia y los valores de nuestros grandes personajes.
+                </p>
+            </div>
+
+            <div id="quiz-box" class="max-w-2xl mx-auto bg-white/90 p-6 sm:p-8 rounded-2xl border border-pastel-sand shadow-sm">
+                <div class="flex justify-between items-center mb-6 border-b border-pastel-sand pb-4">
+                    <span id="quiz-step" class="text-xs font-bold text-pastel-terracottaDark uppercase tracking-wider">Pregunta 1 de 5</span>
+                    <span id="quiz-score" class="text-xs font-bold bg-pastel-gold/40 text-pastel-goldDark px-3 py-1 rounded-full">Puntos: 0</span>
+                </div>
+
+                <div id="quiz-content">
+                    <h3 id="quiz-question" class="text-lg font-bold text-gray-800 mb-6">
+                        Cargando pregunta...
+                    </h3>
+
+                    <div id="quiz-options" class="space-y-3 mb-6">
+                        <!-- Opciones dinámicas -->
+                    </div>
+
+                    <div id="quiz-feedback" class="hidden p-4 rounded-xl text-sm mb-4 font-medium"></div>
+
+                    <button id="quiz-next-btn" class="hidden w-full py-3 rounded-xl bg-pastel-terracotta text-white font-bold hover:bg-pastel-terracottaDark transition-all">
+                        Siguiente Pregunta <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+
+                <div id="quiz-result" class="hidden text-center py-6 space-y-4">
+                    <div class="w-20 h-20 mx-auto rounded-full bg-pastel-gold/30 text-pastel-goldDark flex items-center justify-center text-3xl font-bold">
+                        <i class="fa-solid fa-trophy"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold font-serif text-gray-800">¡Reto Completado!</h3>
+                    <p id="quiz-final-text" class="text-gray-600 text-sm">Tu puntaje obtenido es de 0 puntos.</p>
+                    <button onclick="reiniciarQuiz()" class="px-6 py-3 rounded-2xl bg-pastel-turquoise text-pastel-turquoiseDark font-bold hover:bg-pastel-turquoise/80 transition-all text-sm">
+                        Intentar de Nuevo
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROPUESTAS DE ACCIÓN Y COMPROMISO -->
+    <section id="propuestas" class="py-20 bg-pastel-sand/30 border-t border-pastel-terracotta/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-xs font-bold tracking-widest text-pastel-terracottaDark uppercase bg-pastel-terracotta/20 px-4 py-1.5 rounded-full">
+                    Soluciones Activadoras
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold font-serif text-gray-900 mt-4">
+                    ¿Cómo Pasar a la Acción?
+                </h2>
+                <p class="text-gray-600 mt-3 text-sm sm:text-base">
+                    No basta con diagnosticar el problema; se requieren compromisos reales en las aulas, familias y plataformas digitales.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+                <!-- Propuesta 1 -->
+                <div class="glass-card p-8 rounded-3xl space-y-4 border-t-4 border-pastel-terracotta">
+                    <div class="w-12 h-12 rounded-2xl bg-pastel-terracotta/20 text-pastel-terracottaDark flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-school"></i>
+                    </div>
+                    <h3 class="text-xl font-bold font-serif text-gray-800">1. Rutas Históricas Escolares</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        Implementar minidocumentales y dramatizaciones dentro de colegios como Mariano Melgar, Juan Pablo II y Don Bosco para que cada alumno conozca a fondo el origen de su institución.
+                    </p>
+                </div>
+
+                <!-- Propuesta 2 -->
+                <div class="glass-card p-8 rounded-3xl space-y-4 border-t-4 border-pastel-turquoise">
+                    <div class="w-12 h-12 rounded-2xl bg-pastel-turquoise/20 text-pastel-turquoiseDark flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-mobile-screen-button"></i>
+                    </div>
+                    <h3 class="text-xl font-bold font-serif text-gray-800">2. Contenido Digital en Redes</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        Crear campañas en redes sociales con un lenguaje juvenil y atractivo que muestren las proezas de nuestros héroes en formato vertical de alta resolución.
+                    </p>
+                </div>
+
+                <!-- Propuesta 3 -->
+                <div class="glass-card p-8 rounded-3xl space-y-4 border-t-4 border-pastel-goldDark">
+                    <div class="w-12 h-12 rounded-2xl bg-pastel-gold/30 text-pastel-goldDark flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-comments"></i>
+                    </div>
+                    <h3 class="text-xl font-bold font-serif text-gray-800">3. Diálogos Intergeneracionales</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        Organizar encuentros entre abuelos, historiadores y estudiantes para rescatar la tradición oral, costumbres regionales y la riqueza lingüística autóctona.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Muro de Compromisos Interactivos -->
+            <div class="glass-card rounded-3xl p-8 border border-pastel-gold/40">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    <div class="lg:col-span-5 space-y-4">
+                        <h3 class="text-2xl font-bold font-serif text-gray-900">
+                            Firma tu Compromiso por la Patria
+                        </h3>
+                        <p class="text-sm text-gray-600 leading-relaxed">
+                            Añade tu voz a esta red de peruanos decididos a rescatar nuestra identidad cultural. Tu mensaje aparecerá reflejado en el muro comunitario.
+                        </p>
+
+                        <form id="commitment-form" class="space-y-4 pt-2">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Nombre o Apodo</label>
+                                <input type="text" id="comm-name" required placeholder="Ej. Lucía de Melgar" 
+                                    class="w-full px-4 py-2.5 rounded-xl bg-white border border-pastel-terracotta/30 text-sm focus:outline-none focus:ring-2 focus:ring-pastel-terracotta">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Institución / Ciudad</label>
+                                <input type="text" id="comm-school" required placeholder="Ej. I.E. Mariano Melgar / Arequipa" 
+                                    class="w-full px-4 py-2.5 rounded-xl bg-white border border-pastel-terracotta/30 text-sm focus:outline-none focus:ring-2 focus:ring-pastel-terracotta">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Tu Compromiso Cultural</label>
+                                <textarea id="comm-text" required rows="3" placeholder="Ej. Prometo investigar y difundir la historia de nuestros héroes locales entre mis compañeros..." 
+                                    class="w-full px-4 py-2.5 rounded-xl bg-white border border-pastel-terracotta/30 text-sm focus:outline-none focus:ring-2 focus:ring-pastel-terracotta"></textarea>
+                            </div>
+                            <button type="submit" class="w-full py-3 rounded-xl bg-pastel-terracotta text-white font-bold hover:bg-pastel-terracottaDark transition-all text-sm shadow-md">
+                                <i class="fa-solid fa-paper-plane mr-2"></i> Publicar Compromiso
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="lg:col-span-7">
+                        <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4">Muro Comunitario de Promesas</h4>
+                        <div id="commitments-wall" class="space-y-3 max-h-[380px] overflow-y-auto pr-2 custom-scrollbar">
+                            <!-- Tarjetas dinámicas -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 text-white py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6 border-b border-gray-800 pb-8">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-pastel-terracotta flex items-center justify-center text-white font-serif font-bold text-xl">
+                        R
+                    </div>
+                    <div>
+                        <span class="text-lg font-bold font-serif block">Raíces Vivas</span>
+                        <span class="text-xs text-pastel-turquoise font-medium">Proyecto Nación en Acción</span>
+                    </div>
+                </div>
+                <div class="flex gap-6 text-sm text-gray-400">
+                    <a href="#inicio" class="hover:text-white transition-colors">Inicio</a>
+                    <a href="#problematica" class="hover:text-white transition-colors">Diagnóstico</a>
+                    <a href="#heroes" class="hover:text-white transition-colors">Héroes</a>
+                    <a href="#trivia" class="hover:text-white transition-colors">Trivia</a>
+                </div>
+            </div>
+            <div class="mt-8 text-center md:text-left text-xs text-gray-500 flex flex-col md:flex-row justify-between gap-4">
+                <p>&copy; Proyecto escolar sobre Revalorización Cultural Peruana.</p>
+                <p>Diseñado para presentaciones académicas e impacto socioeducativo.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL DETALLE HÉROE -->
+    <div id="hero-modal" class="fixed inset-0 z-50 hidden bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-8 relative shadow-2xl space-y-5 border border-pastel-gold/40 max-h-[90vh] overflow-y-auto custom-scrollbar">
+            <button id="close-modal" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-pastel-sand text-gray-600 hover:bg-pastel-terracotta hover:text-white flex items-center justify-center transition-all">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div id="modal-body">
+                <!-- Se llena dinámicamente -->
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // DATOS DE HÉROES
+        const heroesData = [
+            {
+                id: 'mariano-melgar',
+                nombre: 'Mariano Melgar',
+                titulo: 'Poeta y Mártir de la Independencia',
+                periodo: 'independencia',
+                icono: 'fa-feather-pointed',
+                imagenBg: 'bg-pastel-terracotta/20',
+                colorTexto: 'text-pastel-terracottaDark',
+                hazana: 'Ofreció su vida en la Batalla de Umachiri a los 24 años por la causa libertadora, creando los famosos yaravíes que expresan el alma peruana.',
+                porQueRecordar: 'Demuestra que la juventud, el arte y las letras son armas poderosas de amor y entrega incondicional a la patria.',
+                detalleCompleto: 'Mariano Lorenzo Melgar Valdivieso (1790-1815) no solo fue un virtuoso humanista y literato que fusionó la poesía neoclásica con el sentimiento andino creando el Yaraví, sino un patriota combatiente. Como auditor de guerra de las tropas de Mateo Pumacahua, luchó contra la opresión colonial y rehusó retractarse antes de ser fusilado.'
+            },
+            {
+                id: 'miguel-grau',
+                nombre: 'Miguel Grau Seminario',
+                titulo: 'El Caballero de los Mares',
+                periodo: 'republica',
+                icono: 'fa-anchor',
+                imagenBg: 'bg-pastel-turquoise/20',
+                colorTexto: 'text-pastel-turquoiseDark',
+                hazana: 'Comandó el Monitor Huáscar resistiendo con estrategia superior durante meses en la Guerra del Pacífico, destacando por su nobleza de espíritu.',
+                porQueRecordar: 'Inspiración universal de caballerosidad, cumplimiento del deber militar y respeto sagrado a la dignidad del enemigo en contienda.',
+                detalleCompleto: 'Miguel Grau (1834-1879) es el Peruano del Milenio. Durante la Guerra del Pacífico, al mando del Monitor Huáscar, detuvo el avance de la flota adversaria demostrando genialidad táctica y un profundo sentido humanístico al rescatar náufragos enemigos y enviar cartas de condolencia a las viudas.'
+            },
+            {
+                id: 'francisco-bolognesi',
+                nombre: 'Francisco Bolognesi',
+                titulo: 'Patrono del Ejército del Perú',
+                periodo: 'republica',
+                icono: 'fa-shield-halved',
+                imagenBg: 'bg-pastel-gold/30',
+                colorTexto: 'text-pastel-goldDark',
+                hazana: 'Pronunció la inmortal promesa de defender la plaza de Arica "hasta quemar el último cartucho", cumpliéndola heroicamente el 7 de junio de 1880.',
+                porQueRecordar: 'Símbolo supremo de integridad, lealtad a la palabra empeñada y renuncia al rendimiento sin condiciones frente a la adversidad.',
+                detalleCompleto: 'A sus 63 años, veterano y retirado de las armas, Bolognesi volvió al servicio cuando la Patria lo requirió. En Arica, superado numéricamente, rechazó la rendición y ofreció su vida junto a sus oficiales para preservar el honor de la nación.'
+            },
+            {
+                id: 'tupac-amaru',
+                nombre: 'Túpac Amaru II',
+                titulo: 'Líder de la Gran Rebelión Anticolonial',
+                periodo: 'independencia',
+                icono: 'fa-crown',
+                imagenBg: 'bg-pastel-lavender/30',
+                colorTexto: 'text-purple-700',
+                hazana: 'Encabezó en 1780 el mayor levantamiento social contra los abusos virreinales y la mita, marcando el inicio de la gesta emancipadora hispanoamericana.',
+                porQueRecordar: 'Pionero de las luchas por los derechos indígenas y precursor del fin de la esclavitud en el continente americano.',
+                detalleCompleto: 'José Gabriel Condorcanqui Noguera (1738-1781) asumió el nombre de su ancestro incaico para liderar una rebelión contra las alcabalas, la mita y las aduanas Interiores. Su sacrificio y el de su familia en la plaza del Cusco encendieron la llama independentista continental.'
+            },
+            {
+                id: 'micaela-bastidas',
+                nombre: 'Micaela Bastidas Puyucahua',
+                titulo: 'Estratega y Prócer de la Libertad',
+                periodo: 'independencia',
+                icono: 'fa-hand-fist',
+                imagenBg: 'bg-pastel-terracotta/20',
+                colorTexto: 'text-pastel-terracottaDark',
+                hazana: 'Administró la logística, aprovisionamiento y estrategia de combate durante la rebelión de 1780, demostrando liderazgo militar sin precedentes.',
+                porQueRecordar: 'Modelo de la entereza, determinación y rol decisivo de la mujer peruana en la construcción de la independencia.',
+                detalleCompleto: 'Micaela Bastidas (1744-1781) fue la principal consejera de Túpac Amaru II. Organizó la retaguardia, el reclutamiento de tropas y la emisión de salvoconductos. Mantuvo una inquebrantable dignidad frente a sus apresores antes de ser ejecutada en Cusco.'
+            },
+            {
+                id: 'jose-olaya',
+                nombre: 'José Olaya Balandra',
+                titulo: 'Mártir de la Red de Mensajería Patriota',
+                periodo: 'independencia',
+                icono: 'fa-fish',
+                imagenBg: 'bg-pastel-turquoise/20',
+                colorTexto: 'text-pastel-turquoiseDark',
+                hazana: 'Pescador chorrillano que nadó entre Chorrillos y el Callao llevando correspondencia secreta entre los patriotas sin revelar secretos tras ser torturado.',
+                porQueRecordar: 'Prototipo del ciudadano humilde de pueblo cuya lealtad invencible prefirió la muerte antes que traicionar a la Patria.',
+                detalleCompleto: 'José Olaya (1782-1823) sirvió como correo secreto a flote durante la ocupación realista de Lima. Tras ser capturado, sufrió crueles torturas e interrogatorios. Su frase legendaria "Si mil vidas tuviera, gustoso las daría por mi patria" resume su ejemplo eterno.'
+            }
+        ];
+
+        // PREGUNTAS TRIVIA
+        const quizQuestions = [
+            {
+                pregunta: "¿Qué poeta y patriota arequipeño entregó su vida a los 24 años en la Batalla de Umachiri?",
+                opciones: ["Miguel Grau", "Mariano Melgar", "José Olaya", "Francisco Bolognesi"],
+                correcta: 1,
+                explicacion: "Mariano Melgar fue un destacado poeta de los Yaravíes y auditor de guerra patriota fusilado en Umachiri (1815)."
+            },
+            {
+                pregunta: "¿Qué famosa respuesta dio Francisco Bolognesi ante la solicitud de rendición en Arica?",
+                opciones: [
+                    "Tengo deberes sagrados que cumplir y los cumpliré hasta quemar el último cartucho.",
+                    "Si mil vidas tuviera, gustoso las daría por mi patria.",
+                    "En este buque nadie se rinde.",
+                    "La victoria nos pertenece por la razón de la justicia."
+                ],
+                correcta: 0,
+                explicacion: "Bolognesi inmortalizó esta promesa de defender el honor nacional el 5 de junio de 1880."
+            },
+            {
+                pregunta: "¿Por qué razón histórica es recordado el héroe José Olaya Balandra?",
+                opciones: [
+                    "Por dirigir las batallas de Junín y Ayacucho.",
+                    "Por escribir el Himno Nacional del Perú.",
+                    "Por nadar entre Chorrillos y Callao transportando mensajes secretos patriotas.",
+                    "Por fundar la primera escuela militar."
+                ],
+                correcta: 2,
+                explicacion: "Olaya, humilde pescador, prefirió la tortura y fusilamiento antes que delatar a la causa independiente."
+            },
+            {
+                pregunta: "Instituciones como Mariano Melgar, Juan Pablo II o Don Bosco buscan que sus alumnos:",
+                opciones: [
+                    "Memorices solo fechas sin reflexionar sobre los valores.",
+                    "Conozcan y vivan el legado ético e histórico de sus patronos con orgullo.",
+                    "Prefieran modismos extranjeros sobre las costumbres peruanas.",
+                    "Eviten el aprendizaje de la historia local."
+                ],
+                correcta: 1,
+                explicacion: "La verdadera revalorización cultural exige que los alumnos entiendan e incorporen el ejemplo de quienes dan nombre a sus aulas."
+            },
+            {
+                pregunta: "¿Qué consecuencia directa provoca la pérdida irreflexiva de la identidad cultural?",
+                opciones: [
+                    "Mayor desarrollo económico automático.",
+                    "Debilitamiento de la cohesión social y fragmentación de la memoria nacional.",
+                    "Incremento del turismo internacional.",
+                    "Mejora de la infraestructura educativa."
+                ],
+                correcta: 1,
+                explicacion: "El desapego de los orígenes destruye el sentido de comunidad y vacía la soberanía histórica del país."
+            }
+        ];
+
+        // COMPROMISOS DE EJEMPLO
+        let commitments = [
+            {
+                nombre: "Carlos Meléndez",
+                colegio: "I.E. Mariano Melgar (Arequipa)",
+                texto: "Me comprometo a organizar un periódico mural mensual sobre las hazañas de Mariano Melgar y los poetas peruanos."
+            },
+            {
+                nombre: "Sofía Alva",
+                colegio: "I.E. Salesiana Don Bosco",
+                texto: "Crearé videos educativos cortos en TikTok para explicar quiénes fueron nuestras heroínas de la independencia."
+            },
+            {
+                nombre: "Mateo Quispe",
+                colegio: "I.E. Juan Pablo II",
+                texto: "Promoveré el respeto por la cultura andina y hablaré con orgullo de mis orígenes en las actuaciones de mi colegio."
+            }
+        ];
+
+        // ESTADO DE LA TRIVIA
+        let currentQuestion = 0;
+        let score = 0;
+
+        // INICIALIZACIÓN
+        document.addEventListener('DOMContentLoaded', () => {
+            renderHeroes('todos');
+            initChartWithRetry();
+            loadQuizQuestion();
+            renderCommitments();
+
+            // Event Listeners Filtros y Buscador
+            document.getElementById('hero-filter').addEventListener('change', () => {
+                filterHeroes();
+            });
+
+            document.getElementById('hero-search').addEventListener('input', () => {
+                filterHeroes();
+            });
+
+            // Mobile menu toggle
+            document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+                const menu = document.getElementById('mobile-menu');
+                menu.classList.toggle('hidden');
+            });
+
+            document.querySelectorAll('.mobile-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                });
+            });
+
+            // Modal listeners
+            document.getElementById('close-modal').addEventListener('click', closeModal);
+            document.getElementById('hero-modal').addEventListener('click', (e) => {
+                if(e.target.id === 'hero-modal') closeModal();
+            });
+
+            // Formulario de Compromisos
+            document.getElementById('commitment-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('comm-name').value;
+                const school = document.getElementById('comm-school').value;
+                const text = document.getElementById('comm-text').value;
+
+                commitments.unshift({ nombre: name, colegio: school, texto: text });
+                renderCommitments();
+
+                document.getElementById('commitment-form').reset();
+            });
+        });
+
+        // RENDERIZAR TARJETAS DE HÉROES
+        function renderHeroes(filterPeriod = 'todos', searchKeyword = '') {
+            const container = document.getElementById('heroes-container');
+            container.innerHTML = '';
+
+            const filtered = heroesData.filter(hero => {
+                const matchesPeriod = filterPeriod === 'todos' || hero.periodo === filterPeriod;
+                const matchesSearch = hero.nombre.toLowerCase().includes(searchKeyword.toLowerCase()) || 
+                                      hero.hazana.toLowerCase().includes(searchKeyword.toLowerCase()) ||
+                                      hero.titulo.toLowerCase().includes(searchKeyword.toLowerCase());
+                return matchesPeriod && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full text-center py-12 text-gray-500">
+                        <i class="fa-solid fa-magnifying-glass text-3xl mb-3"></i>
+                        <p>No se encontraron héroes que coincidan con el criterio.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filtered.forEach(hero => {
+                const card = document.createElement('div');
+                card.className = 'glass-card rounded-3xl p-6 hero-card-hover border border-pastel-sand flex flex-col justify-between space-y-4';
+                card.innerHTML = `
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div class="w-12 h-12 rounded-2xl ${hero.imagenBg} ${hero.colorTexto} flex items-center justify-center text-xl font-bold">
+                                <i class="fa-solid ${hero.icono}"></i>
+                            </div>
+                            <span class="text-xs font-semibold uppercase tracking-wider text-gray-400 bg-white/80 px-3 py-1 rounded-full border border-pastel-sand">
+                                ${hero.periodo}
+                            </span>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-bold font-serif text-gray-900">${hero.nombre}</h3>
+                            <p class="text-xs font-semibold ${hero.colorTexto}">${hero.titulo}</p>
+                        </div>
+
+                        <div class="bg-white/60 p-3.5 rounded-2xl border border-pastel-sand text-xs text-gray-600 space-y-1.5">
+                            <p><strong>Hazaña:</strong> ${hero.hazana}</p>
+                        </div>
+                    </div>
+
+                    <button onclick="openModal('${hero.id}')" class="w-full py-2.5 rounded-xl bg-pastel-sand/80 hover:bg-pastel-terracotta hover:text-white font-semibold text-xs transition-all text-gray-700 flex items-center justify-center gap-2">
+                        <span>Ver Historia Completa</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function filterHeroes() {
+            const period = document.getElementById('hero-filter').value;
+            const search = document.getElementById('hero-search').value;
+            renderHeroes(period, search);
+        }
+
+        // MODAL DETALLE DE HÉROE
+        function openModal(heroId) {
+            const hero = heroesData.find(h => h.id === heroId);
+            if (!hero) return;
+
+            const modalBody = document.getElementById('modal-body');
+            modalBody.innerHTML = `
+                <div class="flex items-center gap-4 border-b border-pastel-sand pb-4">
+                    <div class="w-16 h-16 rounded-2xl ${hero.imagenBg} ${hero.colorTexto} flex items-center justify-center text-2xl font-bold flex-shrink-0">
+                        <i class="fa-solid ${hero.icono}"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold font-serif text-gray-900">${hero.nombre}</h3>
+                        <p class="text-xs font-semibold ${hero.colorTexto}">${hero.titulo}</p>
+                    </div>
+                </div>
+
+                <div class="space-y-4 pt-2">
+                    <div>
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">Reseña Histórica Extendida</h4>
+                        <p class="text-sm text-gray-700 leading-relaxed bg-pastel-sand/30 p-4 rounded-2xl border border-pastel-sand">
+                            ${hero.detalleCompleto}
+                        </p>
+                    </div>
+
+                    <div>
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-pastel-terracottaDark mb-1">¿Por qué debemos recordarlo con orgullo?</h4>
+                        <p class="text-sm font-medium text-gray-800 bg-pastel-terracotta/10 p-4 rounded-2xl border border-pastel-terracotta/20">
+                            ${hero.porQueRecordar}
+                        </p>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('hero-modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('hero-modal').classList.add('hidden');
+        }
+
+        // CHART.JS GRAFICO CON CONTROL DE CARGA
+        let chartInstance = null;
+
+        function initChartWithRetry(retries = 10) {
+            if (typeof Chart !== 'undefined') {
+                initChart();
+            } else if (retries > 0) {
+                setTimeout(() => initChartWithRetry(retries - 1), 200);
+            } else {
+                renderFallbackChart();
+            }
+        }
+
+        function initChart() {
+            const canvas = document.getElementById('chartIdentidad');
+            if (!canvas) return;
+
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+
+            const ctx = canvas.getContext('2d');
+            chartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Patrono Escolar', 'Tradiciones Locales', 'Héroes Principales', 'Orgullo Cultural'],
+                    datasets: [
+                        {
+                            label: 'Porcentaje Escolar Actual (%)',
+                            data: [32, 28, 45, 52],
+                            backgroundColor: '#E8A598',
+                            borderRadius: 10,
+                        },
+                        {
+                            label: 'Meta Nación en Acción (%)',
+                            data: [90, 85, 95, 98],
+                            backgroundColor: '#94D2BD',
+                            borderRadius: 10,
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                font: { family: 'Plus Jakarta Sans', size: 11 }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                callback: function(value) { return value + '%'; }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function renderFallbackChart() {
+            const container = document.getElementById('chartIdentidad').parentElement;
+            container.innerHTML = `
+                <div class="h-full flex flex-col justify-center space-y-4 px-2">
+                    <p class="text-xs text-center font-semibold text-gray-500 mb-2">Indicadores del Diagnóstico Escolar</p>
+                    
+                    <div>
+                        <div class="flex justify-between text-xs font-bold mb-1">
+                            <span>Conocimiento del Patrono Escolar</span>
+                            <span class="text-pastel-terracottaDark">32% Actual / 90% Meta</span>
+                        </div>
+                        <div class="w-full bg-pastel-sand h-3 rounded-full overflow-hidden flex">
+                            <div class="bg-pastel-terracotta h-full" style="width: 32%"></div>
+                            <div class="bg-pastel-turquoise/50 h-full" style="width: 58%"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between text-xs font-bold mb-1">
+                            <span>Valoración de Tradiciones Locales</span>
+                            <span class="text-pastel-terracottaDark">28% Actual / 85% Meta</span>
+                        </div>
+                        <div class="w-full bg-pastel-sand h-3 rounded-full overflow-hidden flex">
+                            <div class="bg-pastel-terracotta h-full" style="width: 28%"></div>
+                            <div class="bg-pastel-turquoise/50 h-full" style="width: 57%"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between text-xs font-bold mb-1">
+                            <span>Identificación con Héroes Nacionales</span>
+                            <span class="text-pastel-terracottaDark">45% Actual / 95% Meta</span>
+                        </div>
+                        <div class="w-full bg-pastel-sand h-3 rounded-full overflow-hidden flex">
+                            <div class="bg-pastel-terracotta h-full" style="width: 45%"></div>
+                            <div class="bg-pastel-turquoise/50 h-full" style="width: 50%"></div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-center gap-4 text-xs font-semibold pt-2">
+                        <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-pastel-terracotta inline-block"></span> Diagnóstico Actual</span>
+                        <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-pastel-turquoise inline-block"></span> Meta del Proyecto</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        // LOGICA DE LA TRIVIA
+        function loadQuizQuestion() {
+            const q = quizQuestions[currentQuestion];
+            document.getElementById('quiz-step').innerText = `Pregunta ${currentQuestion + 1} de ${quizQuestions.length}`;
+            document.getElementById('quiz-score').innerText = `Puntos: ${score}`;
+            document.getElementById('quiz-question').innerText = q.pregunta;
+
+            const optionsContainer = document.getElementById('quiz-options');
+            optionsContainer.innerHTML = '';
+
+            const feedback = document.getElementById('quiz-feedback');
+            feedback.classList.add('hidden');
+
+            const nextBtn = document.getElementById('quiz-next-btn');
+            nextBtn.classList.add('hidden');
+
+            q.opciones.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'w-full text-left p-4 rounded-xl border border-pastel-sand hover:bg-pastel-sand/50 transition-all text-sm font-medium text-gray-700 flex items-center justify-between';
+                btn.innerHTML = `<span>${opt}</span> <i class="fa-regular fa-circle text-gray-300"></i>`;
+                btn.onclick = () => checkAnswer(idx);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(selectedIdx) {
+            const q = quizQuestions[currentQuestion];
+            const options = document.getElementById('quiz-options').children;
+            const feedback = document.getElementById('quiz-feedback');
+            const nextBtn = document.getElementById('quiz-next-btn');
+
+            // Deshabilitar todos los botones
+            for (let btn of options) {
+                btn.disabled = true;
+            }
+
+            if (selectedIdx === q.correcta) {
+                score += 20;
+                options[selectedIdx].classList.add('bg-emerald-100', 'border-emerald-400', 'text-emerald-800');
+                options[selectedIdx].querySelector('i').className = 'fa-solid fa-circle-check text-emerald-600';
+                
+                feedback.className = 'p-4 rounded-xl text-sm mb-4 font-medium bg-emerald-50 text-emerald-800 border border-emerald-200';
+                feedback.innerHTML = `<i class="fa-solid fa-check mr-2"></i> <strong>¡Correcto!</strong> ${q.explicacion}`;
+            } else {
+                options[selectedIdx].classList.add('bg-red-100', 'border-red-400', 'text-red-800');
+                options[selectedIdx].querySelector('i').className = 'fa-solid fa-circle-xmark text-red-600';
+                
+                options[q.correcta].classList.add('bg-emerald-50', 'border-emerald-300');
+
+                feedback.className = 'p-4 rounded-xl text-sm mb-4 font-medium bg-red-50 text-red-800 border border-red-200';
+                feedback.innerHTML = `<i class="fa-solid fa-xmark mr-2"></i> <strong>Incorrecto.</strong> ${q.explicacion}`;
+            }
+
+            document.getElementById('quiz-score').innerText = `Puntos: ${score}`;
+            feedback.classList.remove('hidden');
+
+            if (currentQuestion < quizQuestions.length - 1) {
+                nextBtn.innerText = 'Siguiente Pregunta';
+                nextBtn.onclick = () => {
+                    currentQuestion++;
+                    loadQuizQuestion();
+                };
+            } else {
+                nextBtn.innerText = 'Ver Resultados Finales';
+                nextBtn.onclick = showQuizResults;
+            }
+            nextBtn.classList.remove('hidden');
+        }
+
+        function showQuizResults() {
+            document.getElementById('quiz-content').classList.add('hidden');
+            const resultBox = document.getElementById('quiz-result');
+            resultBox.classList.remove('hidden');
+
+            document.getElementById('quiz-final-text').innerText = `Has obtenido ${score} de 100 puntos posibles. ¡Sigue aprendiendo e inspirando a otros a amar la identidad peruana!`;
+        }
+
+        function reiniciarQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            document.getElementById('quiz-result').classList.add('hidden');
+            document.getElementById('quiz-content').classList.remove('hidden');
+            loadQuizQuestion();
+        }
+
+        // COMPROMISOS
+        function renderCommitments() {
+            const container = document.getElementById('commitments-wall');
+            container.innerHTML = '';
+
+            commitments.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'bg-white/90 p-4 rounded-2xl border border-pastel-sand space-y-1 shadow-sm';
+                card.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-xs text-gray-800">${item.nombre}</span>
+                        <span class="text-[10px] font-semibold text-pastel-terracottaDark bg-pastel-sand px-2 py-0.5 rounded-full">${item.colegio}</span>
+                    </div>
+                    <p class="text-xs text-gray-600 italic">"${item.texto}"</p>
+                `;
+                container.appendChild(card);
+            });
+        }
+    </script>
+</body>
+</html>
